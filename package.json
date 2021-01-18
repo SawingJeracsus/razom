@@ -1,0 +1,21 @@
+{
+  "name": "razom",
+  "version": "1.0.0",
+  "description": "That is a new social network makes by Ukrainian For Ukrainian",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "social",
+    "netwok",
+    "ts",
+    "typescript",
+    "express",
+    "jest",
+    "react",
+    "mysql"
+  ],
+  "author": "Sawinjer <polisukandrij68@gmail.com>",
+  "license": "ISC"
+}
