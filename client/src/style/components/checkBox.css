@@ -1,0 +1,39 @@
+.form-field__checkbox{
+    display: flex;
+}
+
+.input_form-field__checkbox{
+    display: none;
+}
+
+.input_form-field__checkbox ~ label{
+    position: relative;
+    padding-left: 40px;
+}
+
+.input_form-field__checkbox ~ label::before{
+    content: '';
+    position: absolute;
+    top: -7.5px;
+    left: 0;
+    display: block;
+    background-color: #fff;
+    height: 25px;
+    width: 25px;
+    border: 2.5px solid #fff;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.input_form-field__checkbox:checked:not() ~ label::before{
+    content: '';
+    background-color: #fff;
+    border: 2.5px solid #fff;
+}
+
+.input_form-field__checkbox:checked ~ label::before{
+    content: url('../../assetes/checked.svg');
+    padding: 1px;
+    background-color: #DCEDC8;
+    border: 2.5px solid #DCEDC8;
+}

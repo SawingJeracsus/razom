@@ -4,7 +4,8 @@
   "description": "That is a new social network makes by Ukrainian For Ukrainian",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "serve": "nodemon ./dist/index.js"
   },
   "keywords": [
     "social",
@@ -17,5 +18,22 @@
     "mysql"
   ],
   "author": "Sawinjer <polisukandrij68@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "enzyme": "^3.11.0",
+    "express": "^4.17.1",
+    "jest": "^26.6.3",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.14",
+    "@types/enzyme": "^3.10.8",
+    "@types/express": "^4.17.11",
+    "@types/mocha": "^8.2.0",
+    "@types/react-router-dom": "^5.1.7",
+    "chai": "^4.2.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.1",
+    "mocha": "^8.2.1"
+  }
 }
