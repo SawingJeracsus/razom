@@ -4,17 +4,19 @@ import '../style/components/loginInput.css'
 
 interface LoginInputProps  {
     title: string,
+    value: string,
+    onChange(text: string): void,
     type?: string,
     showPlaceholder?: boolean
 }
 
-export const LoginInput: React.FC<LoginInputProps> = ({title, type, showPlaceholder}) => {
+export const LoginInput: React.FC<LoginInputProps> = ({title, type, showPlaceholder, value, onChange}) => {
     return(
         <div className="form-field">
             <div className="form-fieald__title">
                 {title}
             </div>
-            <input type={type} className="form-fieald__input" placeholder={showPlaceholder ? title: ""}/>
+            <input value = {value}type={type} onChange={e => onChange(e.target.value)} className="form-fieald__input" placeholder={showPlaceholder ? title: ""}/>
         </div>
     )
 }

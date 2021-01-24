@@ -1,0 +1,21 @@
+header{
+    background-color: #232323;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 50px;
+    height: 72px;
+}
+
+.header__wrapper-logo{
+    height: 56px;
+}
+
+.header__wrapper-logo img{
+    height: inherit;
+}
+.header__title{
+    color: #fff;
+    font-size: 48px;
+    font-weight: normal;
+}

@@ -1,3 +1,18 @@
+:root{
+  --app-grean: #2A9D8F;
+  --app-dark-green: #264653;
+  --app-red: #E76F51;
+  --app-yellow: #EDC46A;
+  --app-orange: #F4A261;
+}
+@font-face{
+  font-family: "GT-Easty Regular";
+  src: url('assetes/gt-easti/GTEestiProDisplay-Regular.ttf');
+}
+
+*{
+  font-family: "GT-Easty Regular";
+}
 body {
   margin: 0;
   padding: 0;
