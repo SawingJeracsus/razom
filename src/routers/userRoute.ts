@@ -3,8 +3,36 @@ import md5 from 'md5'
 
 import { User } from '../models/User'
 import { validateEmail } from "../libs/validateEmail"
+import { info } from '../libs/logger'
 
 const userRouter = express.Router()
+
+userRouter.get('/check/login', async (req: express.Request, res: express.Response) => {
+    const login  = req.query.login    
+    
+    const ref = await User.findOne({login})
+    !ref ? res.json({
+        code: 200,
+        message: 'Login is unique'
+    }) : res.json({
+        code: 405,
+        message: "Login aren't unique!"
+    })
+})
+
+userRouter.get('/check/email', async (req: express.Request, res: express.Response) => {
+    const email  = req.query.email    
+    
+    const ref = await User.findOne({email})
+    !ref ? res.json({
+        code: 200,
+        message: 'Email is unique'
+    }) : res.json({
+        code: 405,
+        message: "Email aren't unique!"
+    })
+})
+
 
 userRouter.get('/login', async (req: express.Request, res: express.Response) => {
     const {login, password}  = req.query    
@@ -43,9 +71,8 @@ userRouter.get('/login', async (req: express.Request, res: express.Response) => 
     
 })
 
-userRouter.post('/create', async (req: express.Request, res: express.Response) => {
-    
-    const {login, password, email, birthDay}  = req.query
+userRouter.post('/create', async (req: express.Request, res: express.Response) => {    
+    const {login, password, email, birthDay}  = req.body
     const errors: string[] = [];
     
     const validateForExist = (property: any ,name: string) => {

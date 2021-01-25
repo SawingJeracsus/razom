@@ -1,5 +1,6 @@
 import express from "express"
 import mongoose from 'mongoose'
+import bodyParser from 'body-parser'
 import {info, error} from './libs/logger'
 import CONFIG from './libs/config'
 import cors from 'cors'
@@ -14,6 +15,7 @@ mongoose.connection.on("error", (e) => error("MONGO_CONNECT", 'Error in connecti
 
 const app = express()
 app.use(cors())
+app.use(bodyParser.json())
 app.use('/user', userRouter)
 
 app.listen(CONFIG.PORT, () => {

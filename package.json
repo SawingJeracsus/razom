@@ -20,6 +20,7 @@
   "author": "Sawinjer <polisukandrij68@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "enzyme": "^3.11.0",
     "express": "^4.17.1",
@@ -30,6 +31,7 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.0",
     "@types/chai": "^4.2.14",
     "@types/cors": "^2.8.9",
     "@types/enzyme": "^3.10.8",
