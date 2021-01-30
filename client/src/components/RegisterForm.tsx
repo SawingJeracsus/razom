@@ -3,7 +3,7 @@ import Logo from '../assetes/logo.png'
 import {LoginInput} from './LoginFormInput'
 import '../style/components/registerForm.css'
 import { DateSelector } from './DateSelector'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { CONFIG } from '../CONFIG'
 
@@ -19,7 +19,7 @@ export const RegisterForm: React.FC = () => {
     const [ date, setDate ] = useState('')
     
     const [valid, setValid] = useState(false)
-
+    const history = useHistory()
     
 
     const submitHandler = async (e: React.FormEvent) => {
@@ -28,10 +28,13 @@ export const RegisterForm: React.FC = () => {
             login,
             email,
             password,
-            birthDay: date
+            birthDay: date,
+            redirectOn: `${CONFIG.local.host}:${CONFIG.local.port}/confirm`
         })
 
-        console.log(data);
+        if(data.code === 200){
+            history.push("/confirm/email")
+        }
         
     }
 

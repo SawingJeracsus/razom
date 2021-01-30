@@ -1,11 +1,34 @@
 import express from 'express'
 import md5 from 'md5'
-
+import path from 'path'
 import { User } from '../models/User'
 import { validateEmail } from "../libs/validateEmail"
-import { info } from '../libs/logger'
+import { regEmail } from './../letterTemplates/registerSubmit';
+
+import nodemailer from 'nodemailer'
+import CONFIG from '../libs/config'
+
+const transporter = nodemailer.createTransport({
+    host: CONFIG.SMPT.HOST,
+    port: CONFIG.SMPT.PORT,
+    secure: true,
+    auth: {
+        user: CONFIG.SMPT.USER,
+        pass: CONFIG.SMPT.PASSWORD
+    }
+})
+
+// transporter.sendMail({
+//     to: "wesage6693@boldhut.com",
+//     from: "Razom",
+//     subject: "Підтвердження реєстрації",
+//     //@ts-ignore
+//     html: regEmail`https://google.com`
+// })
 
 const userRouter = express.Router()
+
+
 
 userRouter.get('/check/login', async (req: express.Request, res: express.Response) => {
     const login  = req.query.login    
@@ -72,7 +95,7 @@ userRouter.get('/login', async (req: express.Request, res: express.Response) => 
 })
 
 userRouter.post('/create', async (req: express.Request, res: express.Response) => {    
-    const {login, password, email, birthDay}  = req.body
+    const {login, password, email, birthDay, redirectOn}  = req.body
     const errors: string[] = [];
     
     const validateForExist = (property: any ,name: string) => {
@@ -109,13 +132,15 @@ userRouter.post('/create', async (req: express.Request, res: express.Response) =
         const now = new Date()
         //@ts-ignore
         const passwordHash = md5(password)  
-            
+        const tokenEmailActivation = md5(login+password+Math.floor((Math.random() * 1000)).toString()) 
+
             const user = new User({
                 login,
                 email,
                 password: passwordHash,
                 birthDay,
-                create_at: now.toISOString()
+                create_at: now.toISOString(),
+                token: tokenEmailActivation
             })
             await user.save(err => {
                 if(err?.message){
@@ -125,12 +150,40 @@ userRouter.post('/create', async (req: express.Request, res: express.Response) =
                         erorrs: err?.message
                     })
                 }else{
+                    transporter.sendMail({
+                        to: email,
+                        from: "Razom",
+                        subject: "Підтвердження реєстрації",
+                        html: regEmail(`${redirectOn}/${tokenEmailActivation}`)
+                    })
                     res.json({
                         code: 200,
                         message: "Successfully saved!"
                     })
                 }
             })
+    }
+})
+
+userRouter.get('/confirm/:token', async (req: express.Request, res: express.Response) => {
+    const token = req.params.token
+    const __dirname = path.resolve()
+
+
+    const  user = await User.findOne({token})
+    
+    if(user){
+        user.activated = true;
+        await user.save()
+        res.json({
+            code: 200,
+            message: "Successfully updated!"
+        })
+    }else{
+        res.json({
+            code: 404,
+            message: "Can't find user in DB"
+        })
     }
 })
 

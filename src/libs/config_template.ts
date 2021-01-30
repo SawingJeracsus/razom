@@ -4,8 +4,8 @@ const CONFIG = {
     SMPT: {
         HOST: "smtp.gmail.com",
         PORT: 465,
-        USER: "smurffrums18",
-        PASSWORD: "!2qazwsx"
+        USER: "login",
+        PASSWORD: "password"
     }
 }
 

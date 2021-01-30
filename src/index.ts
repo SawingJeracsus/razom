@@ -13,6 +13,9 @@ mongoose.connect('mongodb+srv://root:root@cluster0.4gb9e.azure.mongodb.net/razom
 })
 mongoose.connection.on("error", (e) => error("MONGO_CONNECT", 'Error in connection method!', e))
 
+
+
+
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())

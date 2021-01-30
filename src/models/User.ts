@@ -23,6 +23,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    activated: {
+        type: Boolean,
+        default: false
+    },
+    token: {
+        type: String,
+        required: true,
+        unique: true
+    }
 })
 
 export const User = mongoose.model("User", userSchema)

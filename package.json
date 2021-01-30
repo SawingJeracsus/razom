@@ -28,6 +28,7 @@
     "md5": "^2.3.0",
     "mongoose": "^5.11.13",
     "mysql": "^2.18.1",
+    "nodemailer": "^6.4.17",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
@@ -40,6 +41,7 @@
     "@types/mocha": "^8.2.0",
     "@types/mongoose": "^5.10.3",
     "@types/mysql": "^2.15.17",
+    "@types/nodemailer": "^6.4.0",
     "@types/react-router-dom": "^5.1.7",
     "chai": "^4.2.0",
     "enzyme-adapter-react-16": "^1.15.6",
